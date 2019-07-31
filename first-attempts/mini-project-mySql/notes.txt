@@ -1,0 +1,54 @@
+mySQL(i) Getting Started -> open Wamp -> MyAdminPhp
+
+go to sidebar - New - create new db, collection = "Collection"
+
+the db for this project is called - "mini_project_db"
+
+
+***  Starting: ***
+
+ID field...
+
+on average, the standard length for an int ID field would be 11
+
+"default" ...
+"collection" ... unknown...
+
+attributes = unsigned -> positive integer values only
+
+index = primary
+
+"A_I" -> auto-increment => Check
+
+
+
+varchar vs char
+varchar = if you set length = 255 but only occupy 20 in the actual entry: the db stores only 20 in the db; efficient
+char => as above; this always stores 255, with whitespace to pad... inefficient
+
+
+---------------------------------------
+
+mySQLi -> mySql "improved"...
+
+check w3schools, different methods are:
+
+
+###### object-oriented
+- syntax uses "->";   
+
+      $conn = new mysqli();
+      if($conn->connect_error) {}
+
+
+###### procedural
+- syntax is just regular;
+
+      $conn = mysqli_connect();
+      if(!$conn) {}
+
+
+###### pdo
+- requires an extra download but allows implementation of try/catch...
+
+
