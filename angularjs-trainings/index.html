@@ -15,12 +15,13 @@ src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 	<title>Hello World</title>
 	</head>
+	
 	<body ng-app="ngCribs" ng-controller='cribsController'>
+		
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 			<a class="navbar-brand" href="#">AngularJs-project-brand</a>
 			<button class="btn btn-light float-right" type="button" disabled>Log Out</button>
 		</nav>
-
 
 		<div class="container-fluid" style="position:relative;top:75px;">
 			<h1 class="text-center">{{ hello + ' how are you? ' + (3 * 7 )}}</h1>
@@ -44,11 +45,34 @@ src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 				<div class="thumbnail">
 					<img src="images/{{crib.image}}.jpg" style="height:90px;width:90px;" alt="A Beautiful House">
 					<div class="caption">
-						<h3> {{crib.address }}</h3>
-												<p>BANANA</p>
-						<p><strong>Type: </strong>{{ crib.type }}</p>
-						<p><strong>Description: </strong> {{ crib.description }}</p>
-						<p><strong>Price: </strong> {{ crib.price | currency }}</p>
+						
+<!--						toggle between the two sets of details but keep the images-->
+						<div ng-hide="showDetails === true">
+						
+<!--						<h3> {{crib.address }}</h3>-->
+							<h3><i class="glyphicon glyphicon-tag"></i> {{ crib.price | currency }}</h3>	
+<!--						<p><strong>Type: </strong>{{ crib.type }}</p>-->
+							<h4><i class="glyphicon glyphicon-home"></i> {{crib.address }}</h4>
+<!--						<p><strong>Description: </strong> {{ crib.description }}</p>-->
+							<span><i class="label label-primary label-sm"></i>{{ crib.type }}</span>
+<!--						<p><strong>Price: </strong> {{ crib.price | currency }}</p>-->
+							<button class="btn btn-xs btn-success"
+											ng-hid="showDetails === true"
+											ng-click="showDetails = !showDetails">
+								Details
+							</button>
+							<button class="btn btn-xs btn-danger"
+											ng-hid="showDetails === true"
+											ng-click="showDetails = !showDetails">
+								Close
+							</button>
+							
+						<div class="details" ng-hide="showDetails === true">
+							<h4><span class="label label-primary">Description: {{ crib.description }}</span></h4>
+							
+							</div>
+							
+							
 					</div>
 				</div>
 			</div>
