@@ -56,23 +56,25 @@ src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <!--						<p><strong>Description: </strong> {{ crib.description }}</p>-->
 							<span><i class="label label-primary label-sm"></i>{{ crib.type }}</span>
 <!--						<p><strong>Price: </strong> {{ crib.price | currency }}</p>-->
+                            
+                        </div>
 							<button class="btn btn-xs btn-success"
-											ng-hid="showDetails === true"
+											ng-hide="showDetails === false"
 											ng-click="showDetails = !showDetails">
 								Details
 							</button>
 							<button class="btn btn-xs btn-danger"
-											ng-hid="showDetails === true"
+											ng-hide="showDetails === true"
 											ng-click="showDetails = !showDetails">
 								Close
 							</button>
 							
-						<div class="details" ng-hide="showDetails === true">
+						<div class="details" ng-hide="showDetails === false">
 							<h4><span class="label label-primary">Description: {{ crib.description }}</span></h4>
 							
 							</div>
 							
-							
+
 					</div>
 				</div>
 			</div>
