@@ -1,0 +1,21 @@
+/*
+#main-nav:after {
+clear: both;
+display: table;
+content: "";
+}*/
+
+#intro-to-grids div {
+
+   border: solid 1px black;
+   background: grey;
+
+
+
+}
+
+
+body {
+   padding-top: 75px;
+/*   margin-bottom: 10px;*/
+}

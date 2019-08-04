@@ -1,0 +1,162 @@
+/* all elements */
+
+html, 
+body, 
+.cover,
+#cover-content,
+.row,
+#side-menu {
+   height: 100%;
+   padding: 0;
+   /*   margin: 0;  this for some reason seems to increase the margin size*/
+}
+
+/* "body", full window including all nav bars */
+#cover-content {
+   box-sizing: border-box;
+   padding-top: 70px;  /* navbar height... 70 eg1, 60 eg2 */
+   height: 100%;
+   background: #ebebeb;
+}
+
+
+/* "body" excluding the top navbar, sidebar and content only. locked to a max size, responsive */
+#page-display {
+   max-width: 960px;
+   background: white;
+}
+
+/* top menu bar and contents */
+#top-menu.navbar {
+
+   background: #081d33;  /* Smartfocus-specific */
+   min-height: 60px;
+   position: fixed;
+}
+
+#logo {
+   width: 150px;
+   padding: 0;
+   margin: 0;
+   height: 55px;
+}
+
+#navbarCollapse {
+   padding: 5px 0;
+}
+
+#login {
+   border: none;
+   line-height: 1em;
+   padding-left: 1rem !important;
+   padding-right: 1rem !important;
+   padding-top: 0.5rem !important;
+   padding-bottom: 0.5rem !important;
+   color: white;
+   background: #23aae0;
+   -moz-border-radius: 6px;
+   -webkit-border-radius: 6px;
+   border-radius: 6px;
+}
+/*#login:hover { background: #f2f2f2; }*/
+#login:active { position: relative; top: 1px; }
+
+
+/* side-bar and contents */
+#cover-content .row #side-menu {
+   min-height: 225px;
+   padding: 0;
+   margin-right: 5px;
+   max-width: 160px;
+}
+
+#cover-content .row #side-menu li {
+   height: 20%;
+   min-height: 45px;
+   text-align: center;
+   border: solid 0.5px #dee2e6;
+   /*   border-radius: 20px 0 3px 3px;*/
+   background: #23aae0;  /* eg1 specific */
+}
+
+#cover-content .row #side-menu li a:hover { background: #60c5ee; }
+
+#cover-content .row #side-menu li a:active {
+   background: white;
+   color: #081d33;
+}
+
+
+#cover-content .row #side-menu li a {
+   padding: 10px;
+   padding-left: 15px;
+   min-height: 45px;
+   height: 100%;
+   font-weight: bold;
+   color: white;
+}
+
+#cover-content .row #side-menu li .sidebar-img {
+   display: block;
+   min-height: 80%;
+   margin: 0 auto;
+   width: 3em;
+}
+
+#cover-content .row #side-menu li label {
+   margin-top: 0;
+   padding-top: 0;
+   position: relative;
+   top: -15px;
+   font-size: 80%;
+}
+
+/* the main bit of the app with some actual infos relating to the selected tab */
+.tab-content {
+   width: auto;
+   /*
+   padding-left: 0;
+   padding-top: 20px;
+   */
+   color: #081d33;
+   font-weight: bold;
+   text-transform:capitalize;
+   margin: 0 auto;
+}
+
+hr {
+   background: #081d33;
+}
+
+.table-responsive {   
+   width: 100%;
+
+}
+
+footer {
+   background: grey;
+   color: white;
+   text-align: center; 
+   padding: 20px;
+   font-family: Georgia, Time, serif;
+}
+
+
+
+/* Media Queries! */
+/* 960 is the average width, divides well for smaller sized */
+/* desktop: 1200px wide, ipad 768x1024px, iphone 320x568px */
+
+
+@media only screen and ( max-width: 568px ) {
+   /*   at 568px (iphone6 and above landscape) or less, do: */
+   label {
+      visibility: hidden;
+   }
+
+
+   .cover {
+      font-size: 10px;
+   }
+
+}

@@ -1,0 +1,95 @@
+* {
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 18px;
+    height: 20px;
+}
+
+input[type="button"] {
+    border: solid 1px black;
+    padding: 5px 10px;
+    height: 25px;
+    color: white;
+    background: #77b82f;
+}
+
+input#reset {
+    background: #fc3;
+    color: #444;
+}
+
+input[type="button"]:hover {
+    cursor: pointer;
+}
+
+input[type="button"]:active {
+    position: relative;
+    top: 1px;
+}
+
+div {
+    margin: 20px 0;
+}
+
+#road {
+    background: url('../img/road.jpg') center left repeat-x;
+    height: 200px;
+    width: 100%;
+    /* this border will be our finish line... so it needs to be inside the box... as so: */
+    border-right: dashed 13px white;
+    box-sizing: border-box;
+}
+
+.car {
+    display: block;
+    position: relative;
+    height: 65px;
+    left: 0;
+}
+
+#car1 { top: 15px; }
+#car2 { top: 55px; }
+
+#results {
+    width: 500px;
+    margin: 0 auto;
+    background: black;
+    padding: 5px;
+}
+
+h2 {
+    text-transform: uppercase;
+    color: white;
+    font-size: 14px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px white;
+}
+
+#result1, #result2 {
+    display: inline;
+    font-size: 14px;
+    font-weight: bold;
+    width: 50%;
+    float: left;
+}
+
+#result1 { color: #77b82f; }
+#result2 { color: #b82f3e; }
+
+#results span {
+    display: block;
+    font-weight: normal;
+    font-size: 20px;
+    color: white;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}

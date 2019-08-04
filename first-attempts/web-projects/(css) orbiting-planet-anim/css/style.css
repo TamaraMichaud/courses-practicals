@@ -1,0 +1,121 @@
+@keyframes starPulse {
+
+    from {opacity: 1;}
+    to {opacity: 0.2;}
+}
+
+@keyframes sunFire {
+
+    from { box-shadow: 0 0 50px #f5c91a;}
+    to { box-shadow: 0 0 100px #f5c91a;}
+}
+
+@keyframes rotation {
+
+    from {
+        transform: rotate(0);
+    }
+    
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+#space {
+    background: black;
+    background: -webkit-radial-gradient(#555, #000);
+    background: -moz-radial-gradient(#555, #000);
+    background: -o-radial-gradient(#555, #000);
+    background: radial-gradient(#555, #000);
+}
+
+#stars {
+    position: relative;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    background: url('../images/stars.png');
+    animation: starPulse 4s infinite alternate;
+}
+
+
+#sun {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    background: yellow;
+    background: radial-gradient(yellow, orange);
+    box-shadow: 0 0 50px #f5c91a;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /*    ^^ this wont give you the center of the screen; it will put the top-left corner of the sun in the center.... so, let's trick the margins
+    */
+    z-index: 4;
+    margin-top: -100px;
+    margin-left: -100px;
+
+    animation: sunFire 3s infinite alternate;
+}
+
+#earth {
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
+    background: url('../images/earth.png') no-repeat;
+
+    box-shadow: 0 0 10px lightblue;
+
+    /* trash -> spins on the spot, rotates round the sun*/
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -40px;
+    animation: rotation 3s linear infinite;
+}
+
+
+#earthOrbit {
+/*    border: solid 2px red;*/
+    height: 500px;
+    width: 600px;
+    position: absolute;
+    z-index: 4;
+
+    margin-top: -250px;
+    margin-left: -300px;
+    top: 50%;
+    left: 50%;
+    border-radius: 100% 80%;
+
+     animation: rotation 20s linear infinite;
+}
+
+
+#moon {
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background: radial-gradient(#ddd, #888);
+    box-shadow: 0 0 5px white; 
+    /* << horizontal shadow, then vertical shadow, then Blur, then color */ 
+
+}
+
+#moonOrbit {
+/*    border: solid 1px red;*/
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    margin-top: -60px;
+    top: 50%;
+    left: -20px;
+    position: absolute;
+     animation: rotation 4s linear infinite reverse;
+}

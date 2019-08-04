@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>jQuery</title>
+
+        <link rel="stylesheet" type="text/css" href="css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!--[if IE]>
+<script 
+src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+    </head>
+
+    <body>
+
+        <h1>jQuery Car Racr 1.0</h1>
+        <input type="button" id="race" value="Race!">
+        <input type="button" id="reset" value="Reset">
+
+        <div id="road">
+            <img src="img/car1.png" alt="Car 1" id="car1" class="car">
+            <img src="img/car2.png" alt="Car 2" id="car2" class="car">
+        </div>
+
+        <div id="results" class="clearfix">
+            <h2>Results</h2>
+
+            <div id="result1" class="raceInfo">Car 1<span></span>
+            </div>
+
+            <div id="result2" class="raceInfo">Car 2<span></span>
+            </div>
+
+        </div>
+
+
+        <!-- load cdn first, faster  -->
+        <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+        <!-- if cdn unavailable, load local version-->
+        <script src="js/jquery-3.4.1.js">window.jQuery || document.write('<script src="js/jquery-3.4.1.js"><\/script>');</script>
+        <script src="js/script.js"></script>
+    </body>
+</html>

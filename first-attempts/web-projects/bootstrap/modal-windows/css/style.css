@@ -1,0 +1,6 @@
+#scrollerBox {
+   position: relative;
+   height: 100px;
+   overflow: auto;
+   border: solid 1px #ccc;
+}
