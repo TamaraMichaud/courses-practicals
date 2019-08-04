@@ -32,7 +32,9 @@ if( isset( $_POST["login"])) {
       $loginMsg = "User not found";
    } elseif(password_verify($password, $stored_password)) {
 
+//		 	 echo "EMAIL: $email";
       echo "<small class='alert-success text-uppercase form-control'>Password Verified, Logging In...</small>";
+	
       setSessionInfo(getUser($conn, $email), $email, $_SESSION);
       header('Location: landing_page.php');
       exit();

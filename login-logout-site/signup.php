@@ -2,7 +2,7 @@
 session_start();
 
 $titleVariable = "My Site - Sign Up";
-// username: dummy_user,  password: PA55worD, email: dontemailme@no.no
+// firstname: dummy_user,  password: PA55worD, email: dontemailme@no.no
 
 //includes
 include('includes/functions.php');
@@ -34,12 +34,13 @@ $newuser_name = $newuser_email = $newuser_password = "";
    $fieldsList = 
       array("email" => array("inputType" => "email", 
                              "optional" => 0),
-            "username" => array("inputType" => "text", 
+            "firstname" => array("inputType" => "text", 
                                 "optional" => 0),
             "password" => array("inputType" => "password", 
-                                "optional" => 0),
-            "biography" => array("inputType" => "text", 
-                                 "optional" => 1)
+                                "optional" => 0)
+//						,
+//            "biography" => array("inputType" => "text", 
+//                                 "optional" => 1)
            );
 
    generateSignUpFormInputs($fieldsList); 
@@ -54,24 +55,22 @@ $newuser_name = $newuser_email = $newuser_password = "";
       $conn = newConnection();
       //   echo "clicked submit...";
 
-      $newuser_name = cleanFormData($_POST["username"]);
+      $newuser_name = cleanFormData($_POST["firstname"]);
       $newuser_email = cleanFormData($_POST["email"]);
       $newuser_password = cleanFormData($_POST["password"]);
-      $newuser_bio = cleanFormData($_POST["biography"]);
+//      $newuser_bio = cleanFormData($_POST["biography"]);
 
       if($newuser_name && $newuser_email && $newuser_password ){
          // we don't care about the biography, it's optional anyway
 
-         //      $email = password_hash($email, PASSWORD_DEFAULT);
-         // ^^ how do we un-hash the email value...??
-
          $hashedPassword = password_hash($newuser_password, PASSWORD_DEFAULT);
       
          $arrayOfValues = 
-            array("username" => $newuser_name,
+            array("firstname" => $newuser_name,
                   "email" => $newuser_email,
-                  "password" => $hashedPassword,
-                  "biography" => ($newuser_bio == "") ? 'null' : "'$newuser_bio'"
+                  "password" => $hashedPassword
+//									,
+//                  "biography" => ($newuser_bio == "") ? 'null' : "'$newuser_bio'"
                  );
 
          if(!$conn) {
@@ -79,11 +78,11 @@ $newuser_name = $newuser_email = $newuser_password = "";
          } else {
             $insertResult = insertUser($conn, $arrayOfValues);
             if($insertResult){
-               $newuser_id = getId($conn, $newuser_name);
+               $newuser_id = getId($conn, $newuser_email);
 
                echo "<div class='alert alert-success'>New User Created, ID: ${newuser_id}</div>";
                setSessionInfo($newuser_name, $newuser_email, $_SESSION);
-               echo "<a href='./landing_page.php' class='btn btn-success btn-lg'>Take Me To The Fun Stuff!</a>";
+               echo "<a href='./landing_page.php' class='btn btn-success btn-lg'>Take Me To The Fun Stuff!</a><br></div>";
 
             } else {
                echo "<div class='alert alert-danger'>Failed to insert new user</div>";
@@ -93,40 +92,13 @@ $newuser_name = $newuser_email = $newuser_password = "";
       mysqli_close($conn);
 
    } // end of "if they clicked add"
+	else {
    ?>
 
    <input type="submit" name="adduser" class="btn btn-lg form-control btn-success" value="Sign Me Up!">
+	
+	<?php } ?>
 
 </form>
-
-
-
-<!--
-<?php 
-
-//if($newuser_name && $newuser_email && $newuser_password) {
-//
-//   $conn = newConnection();
-//   if(!$conn) {
-//      echo "<div class='alert alert-danger'>FAIL: Database Connection Lost!</div>";
-//   } else {
-//
-//      $query = "SELECT * from users where username = '$newuser_name'";
-//      $resultSet = mysqli_query($conn, $query);
-//
-//      echo "<div>The Username Inserted Should Be: $newuser_name</div";
-//
-//      if($resultSet == "") {
-//         echo "Woopsie Something's gone awry";
-//      } else {
-//         echo "<h4>New User Info</h4>";
-//         displayTableOf($conn, $resultSet);
-//      }
-//   }
-//   mysqli_close($conn);
-//}
-?>
--->
-
 
 <?php include('includes/footer.php'); ?>

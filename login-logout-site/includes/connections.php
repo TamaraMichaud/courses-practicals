@@ -39,10 +39,11 @@ function getPassword($conn, $email) {
 
 function insertUser($conn, $userInfo) {
 
-   $query = "insert into users (id, name, /*username,*/ password, email /*, signup_date, biography*/)
-   values (null, '" . $userInfo["name"] . "', '" . $userInfo["password"] . "', '" . $userInfo["email"] . "'";
-   //   , CURRENT_TIMESTAMP, " . $userInfo["biography"] . ")";
+   $query = "insert into users (firstname, password, email)
+   values ( '" . $userInfo["firstname"] . "', '" . $userInfo["password"] . "', '" . $userInfo["email"] . "')";
 
+//	echo $query;
+	
    if( mysqli_query($conn, $query) ) {
 
       return true; // success
@@ -53,9 +54,9 @@ function insertUser($conn, $userInfo) {
    }
 }
 
-function getId($conn, $user_name) {
+function getId($conn, $email) {
 
-   $result = mysqli_query($conn, "select id from users where username = '$user_name'");
+   $result = mysqli_query($conn, "select id from users where lower(email) = lower('$email')");
 
    if(mysqli_num_rows($result) == 1) {
 
@@ -68,12 +69,12 @@ function getId($conn, $user_name) {
 
 function getUser($conn, $email) {
 
-   $result = mysqli_query($conn, "select name from users where email = '$email'");
+   $result = mysqli_query($conn, "select firstname from users where email = '$email'");
 
    if(mysqli_num_rows($result) == 1) {
 
       while($row = mysqli_fetch_assoc($result) ) {
-         return $row["name"]; 
+         return $row["firstname"]; 
       }
    }
    return "";
