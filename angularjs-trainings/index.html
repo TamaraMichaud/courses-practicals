@@ -15,87 +15,206 @@ src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 	<title>Hello World</title>
 	</head>
-	
 	<body ng-app="ngCribs" ng-controller='cribsController'>
-		
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 			<a class="navbar-brand" href="#">AngularJs-project-brand</a>
 			<button class="btn btn-light float-right" type="button" disabled>Log Out</button>
 		</nav>
-
 		<div class="container-fluid" style="position:relative;top:75px;">
-			<h1 class="text-center">{{ hello + ' how are you? ' + (3 * 7 )}}</h1>
-			<hr>
-
-			<button class="btn btn-lg btn-primary" ng-click="showMessage = !showMessage">Toggle Message</button>
-			<!--         <button class="btn btn-lg btn-primary" ng-click="showMessage = false">Hide Message</button>-->
-
-			<h2 ng-show="showMessage == true">Secret Message</h2>
-			<br>
-			<hr>
-
-			<input type="text" placeholder="leave a message" ng-model="message">
-			<h2> {{ message }} </h2>
-			<hr>
-
-
-			<!--                       ng-repeat="{item} in {array-of-items}"-->
-<!--			<div class="row">-->
-			<div class="card card-body bg-light col col-sm-4 " ng-repeat="crib in cribs.data">
-				<div class="thumbnail">
-					<img src="images/{{crib.image}}.jpg" style="height:90px;width:90px;" alt="A Beautiful House">
-					<div class="caption">
-						
-<!--						toggle between the two sets of details but keep the images-->
-						<div ng-hide="showDetails === true">
-						
-<!--						<h3> {{crib.address }}</h3>-->
-							<h3><i class="glyphicon glyphicon-tag"></i> {{ crib.price | currency }}</h3>	
-<!--						<p><strong>Type: </strong>{{ crib.type }}</p>-->
-							<h4><i class="glyphicon glyphicon-home"></i> {{crib.address }}</h4>
-<!--						<p><strong>Description: </strong> {{ crib.description }}</p>-->
-							<span><i class="label label-primary label-sm"></i>{{ crib.type }}</span>
-<!--						<p><strong>Price: </strong> {{ crib.price | currency }}</p>-->
-                            
-                        </div>
-							<button class="btn btn-xs btn-success"
-											ng-hide="showDetails === false"
-											ng-click="showDetails = !showDetails">
-								Details
-							</button>
-							<button class="btn btn-xs btn-danger"
-											ng-hide="showDetails === true"
-											ng-click="showDetails = !showDetails">
-								Close
-							</button>
-							
-						<div class="details" ng-hide="showDetails === false">
-							<h4><span class="label label-primary">Description: {{ crib.description }}</span></h4>
-							
+			<div class="price-form">
+				<div class="row">
+					<div class="col col-sm-12">
+						<button class="btn btn-primary mb-3" ng-click="addListing = !addListing" ng-show="!addListing">Add Listing</button>
+						<button class="btn btn-danger" ng-click="addListing = !addListing" ng-show="addListing">Close</button>
+						<!--	ng-if will only display this when true, entire block will be hidden on false.  (shorthand true here; no need for "== true")-->
+						<div class="listing-form" ng-if="addListing">
+							<h2 class="text-white text-center">Add a Listing</h2>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Address</span>
+								</div>
+								<input class="form-control" 
+											 type="text" 
+											 placeholder="Enter the address" 
+											 ng-model="newListing.address">
 							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Price</span>
+								</div>
+								<input class="form-control" 
+											 type="text" 
+											 placeholder="Enter the price" 
+											 ng-model="newListing.price">
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Property Type</span>
+								</div>
+								<select class="form-control" 
+												name="propertyType"
+												id="propertyType"
+												ng-model="newListing.type">
+									<option value="House">House</option>
+									<option value="Flat">Flat</option>
+									<option value="Condo">Condo</option>
+									<option value="Duplex">Duplex</option>
+								</select>
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Description</span>
+								</div>
+								<textarea class="form-control" rows=5 placeholder="Enter the description" ng-model="newListing.details.description"></textarea>
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Beds</span>
+								</div>
+								<input class="form-control" type="number" placeholder="Bedrooms"
+											 ng-model="newListing.details.bedrooms">
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Baths</span>
+								</div>
+								<input class="form-control" type="number" placeholder="Bathrooms"
+											 ng-model="newListing.details.bathrooms">
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">SqFt</span>
+								</div>
+								<input class="form-control" type="number" placeholder="Square Footage" ng-model="newListing.details.area">
+							</div>
+							<br>
+							<button class="btn btn-primary listing-button" 
+ng-click="addCrib(newListing)"
+											>Add</button>
 							
-
+							
+							<br>
+							<pre>{{newListing | json }}</pre>
+						</div>
+					</div>
+				</div>
+				<div class="row" ng-if="!addListing">
+					<div class="col col-sm-6">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Min Price</span>
+							</div>
+							<select name="minPrice" id="minPrice" ng-model="priceInfo.min" class="form-control">
+								<option value="0">None</option>
+								<option value="100000">$100,000</option>
+								<option value="200000">$200,000</option>
+								<option value="300000">$300,000</option>
+								<option value="400000">$400,000</option>
+								<option value="500000">$500,000</option>
+								<option value="600000">$600,000</option>
+								<option value="700000">$700,000</option>
+								<option value="800000">$800,000</option>
+								<option value="900000">$900,000</option>
+								<option value="1000000">$1,000,000</option>
+							</select>
+						</div>
+					</div>
+					<div class="col col-sm-6">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Max Price</span>
+							</div>
+							<select name="maxPrice" id="maxPrice" ng-model="priceInfo.max" class="form-control">
+								<option value="9999999999">None</option>
+								<option value="100000">$100,000</option>
+								<option value="200000">$200,000</option>
+								<option value="300000">$300,000</option>
+								<option value="400000">$400,000</option>
+								<option value="500000">$500,000</option>
+								<option value="600000">$600,000</option>
+								<option value="700000">$700,000</option>
+								<option value="800000">$800,000</option>
+								<option value="900000">$900,000</option>
+								<option value="1000000">$1,000,000</option>
+							</select>
+						</div>
 					</div>
 				</div>
 			</div>
-<!--</div>-->
+			<br>
+			<div class="row">
+				<div class="card card-body bg-light col col-sm-4 " ng-repeat="crib in cribs.data | cribsFilter:priceInfo">
+					<!-- ^^ add a filter to a function with pipe; then pass arguments with :-->
+<!--					you can chain as many filters as you want...-->
+					<!--				<div class="thumbnail"><< i dont like the aesthetic that this produces-->
+					<img src="images/{{crib.image}}.jpg" class="img-fluid rounded mx-auto d-block" alt="A Beautiful House">
+					<!--					<div class="caption">-->
+					<!--						toggle between the two sets of details but keep the images-->
+					<div ng-hide="showDetails === true">
+						<!--						<h3> {{crib.address }}</h3>-->
+						<h3>
+							<i data-feather="tag"></i> {{ crib.price | currency }}
+
+						</h3>
+						<!--						<p><strong>Type: </strong>{{ crib.type }}</p>-->
+						<h4>
+							<i data-feather="home"></i> {{crib.address }}
 
 
+							<!--						<p><strong>Description: </strong> {{ crib.description }}</p>-->
+							<span style="background:#007bff;padding:3px;padding-right:4px;color:white;font-size:14px;border-radius:5px;">{{ crib.type }}</span>
+						</h4>
+						<!--						<p><strong>Price: </strong> {{ crib.price | currency }}</p>-->
+					</div>
+					<button class="btn btn-xs btn-success"
+									ng-hide="showDetails === true"
+									ng-click="showDetails = !showDetails">
+						Details
+					</button>
+					<button class="btn btn-xs btn-danger"
+									ng-show="showDetails === true"
+									ng-click="showDetails = !showDetails">
+						Close
+					</button>
+					<div class="details" ng-show="showDetails === true">
+						<h4>
+							<span class="label label-primary">Description: {{ crib.description }}</span>
+						</h4>
+					</div>
+					<!--					</div>-->
+					<!--				</div>-->
+				</div>
+			</div>
+			<br>
+			<hr>
+			<h1 class="text-center">{{ hello + ' how are you? ' + (3 * 7 )}}</h1>
+			<hr>
+			<button class="btn btn-lg btn-primary" ng-click="showMessage = !showMessage">Toggle Message</button>
+			<!--         <button class="btn btn-lg btn-primary" ng-click="showMessage = false">Hide Message</button>-->
+			<h2 ng-show="showMessage == true">Secret Message</h2>
+			<br>
+			<hr>
+			<input type="text" placeholder="leave a message" ng-model="message">
+			<h2> {{ message }} </h2>
+			<hr>
 			<div class="container-fluid">
-<!--				<div class="row">-->
-					<pre><small>
+				<!--				<div class="row">-->
+				<pre>
+                                                                                                <small>
                        {{ cribs | json }}
              </small>
-        </pre>
-<!--				</div>-->
-
+                                                                                            </pre>
+				<!--				</div>-->
 			</div>
 		</div>
-
 		<!-- load cdn first, faster  -->
 		<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
 		<!-- if cdn unavailable, load local version-->
-		<script src="js/jquery-3.4.1.js">window.jQuery || document.write('<script src="js/jquery-3.4.1.js"><\/script>');</script>
+		<script src="js/jquery-3.4.1.js">window.jQuery || document.write('
+
+																																		 <script src="js/jquery-3.4.1.js"><\/script>');
+
+		</script>
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
 		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
@@ -108,5 +227,11 @@ src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<script src="app.js"></script>
 		<script src="scripts/cribsController.js"></script>
 		<script src="scripts/cribsFactory.js"></script>
+		<script src="scripts/cribsFilter.js"></script>
+		<!-- Icons -->
+		<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+		<script>
+			feather.replace()
+		</script>
 	</body>
 </html>

@@ -1,23 +1,54 @@
 [
-   {
-		 "image": "image1",
-   "type": "Condo",
-   "price": 220000,
-   "address": "213 Grove Street",
-   "description": "Excellent place, really nice view!"
-},
-{
+	{
+		"id": 1,
+		"image": "image1",
+		"type": "Condo",
+		"price": 220000,
+		"address": "213 Grove Street",
+		"description": "Excellent place, really nice view!",
+		"details": {
+		"bedrooms": 2,
+		"bathrooms": 1.5, 
+		"area": 921
+	}
+	},
+	{
+	"id": 2,
 	"image": "image2",
-   "type": "House",
-   "price": 410500,
-   "address": "7823 Winding Way",
-   "description": "Beautiful home with lots of space for a large family."
-},
-{
+	"type": "House",
+	"price": 410500,
+	"address": "7823 Winding Way",
+	"description": "Beautiful home with lots of space for a large family.",
+	"details": {
+	"bedrooms": 4,
+	"bathrooms": 3, 
+	"area": 2145
+	}
+	},
+	{
+	"id": 3,
 	"image": "image3",
-   "type": "Duplex",
-   "price": 395000,
-   "address": "834 River Lane",
-   "description": "Great neighbourhood and lots of nice green space." 
-}
-   ]
+	"type": "Duplex",
+	"price": 395000,
+	"address": "834 River Lane",
+	"description": "Great neighbourhood and lots of nice green space." ,
+			 "details": {
+		 "bedrooms": 2,
+		 "bathrooms": 1.5, 
+		 "area": 921
+	 }
+	},
+	{
+	"id": 4,
+	"image": "image3",
+	"type": "Flat",
+	"price": 650000,
+	"address": "4958 Large Tower",
+	"description": "Awesome views",
+			 "details": {
+		 "bedrooms": 2,
+		 "bathrooms": 1.5, 
+		 "area": 921
+	 }
+	}
+]
