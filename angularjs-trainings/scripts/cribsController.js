@@ -16,6 +16,8 @@ angular
 	
 	$scope.addCrib = function(newListing) {
 		newListing.image = "image3";
+		
+//		newListing.id = maxId + 1; 
 		$scope.cribs.data.push(newListing);
 		$scope.newListing = {};
 	}

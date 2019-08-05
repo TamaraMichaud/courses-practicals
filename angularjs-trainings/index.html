@@ -143,7 +143,7 @@ ng-click="addCrib(newListing)"
 			</div>
 			<br>
 			<div class="row">
-				<div class="card card-body bg-light col col-sm-4 " ng-repeat="crib in cribs.data | cribsFilter:priceInfo">
+				<div class="card card-body bg-light col col-sm-4 " ng-repeat="crib in cribs.data | cribsFilter:priceInfo | orderBy: '-id'">
 					<!-- ^^ add a filter to a function with pipe; then pass arguments with :-->
 <!--					you can chain as many filters as you want...-->
 					<!--				<div class="thumbnail"><< i dont like the aesthetic that this produces-->
