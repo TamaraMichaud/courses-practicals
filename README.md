@@ -1,3 +1,10 @@
 # courses-practicals
 
-here are most of the projects I have built by following... to start with at least... various online courses
+## login-logout-site
+a simple php site utilising session functionality, bootstrap formatting and mySql connection
+
+## angularjs
+a clunky attempt at angular
+
+## first-attempts
+Old projects and practices containing code at a standard not worthy of further mention
