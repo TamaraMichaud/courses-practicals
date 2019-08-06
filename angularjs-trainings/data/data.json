@@ -1,12 +1,16 @@
 [
 	{
+		placeholderObj = "true"
+		
+	},
+	{
 		"id": 1,
 		"image": "image1",
 		"type": "Condo",
 		"price": 220000,
 		"address": "213 Grove Street",
-		"description": "Excellent place, really nice view!",
 		"details": {
+					"description": "Excellent place, really nice view!",
 		"bedrooms": 2,
 		"bathrooms": 1.5, 
 		"area": 921
@@ -18,8 +22,8 @@
 	"type": "House",
 	"price": 410500,
 	"address": "7823 Winding Way",
-	"description": "Beautiful home with lots of space for a large family.",
 	"details": {
+		"description": "Beautiful home with lots of space for a large family.",
 	"bedrooms": 4,
 	"bathrooms": 3, 
 	"area": 2145
@@ -31,8 +35,9 @@
 	"type": "Duplex",
 	"price": 395000,
 	"address": "834 River Lane",
-	"description": "Great neighbourhood and lots of nice green space." ,
+	
 			 "details": {
+				 "description": "Great neighbourhood and lots of nice green space." ,
 		 "bedrooms": 2,
 		 "bathrooms": 1.5, 
 		 "area": 921
@@ -44,8 +49,8 @@
 	"type": "Flat",
 	"price": 650000,
 	"address": "4958 Large Tower",
-	"description": "Awesome views",
 			 "details": {
+				 	"description": "Awesome views",
 		 "bedrooms": 2,
 		 "bathrooms": 1.5, 
 		 "area": 921

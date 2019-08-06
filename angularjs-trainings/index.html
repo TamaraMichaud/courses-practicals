@@ -9,6 +9,8 @@ name: viewport is what makes your site responsive -->
 	<!--        <link rel="stylesheet" href="css/normalize.css">-->
 	<link rel="stylesheet" href="css/style.css">
 	<link href="js/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
+	<!--	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/fontawesome.min.css">-->
+	<script src="https://kit.fontawesome.com/51a22e9340.js"></script>
 	<!--[if IE]>
 <script 
 src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,7 +23,10 @@ src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<button class="btn btn-light float-right" type="button" disabled>Log Out</button>
 		</nav>
 		<div class="container-fluid" style="position:relative;top:75px;">
+
 			<div class="price-form">
+
+				<!--				Add New Listing-->
 				<div class="row">
 					<div class="col col-sm-12">
 						<button class="btn btn-primary mb-3" ng-click="addListing = !addListing" ng-show="!addListing">Add Listing</button>
@@ -89,16 +94,19 @@ src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 							</div>
 							<br>
 							<button class="btn btn-primary listing-button" 
-ng-click="addCrib(newListing)"
+											ng-click="addCrib(newListing)"
 											>Add</button>
-							
-							
+
+
 							<br>
 							<pre>{{newListing | json }}</pre>
 						</div>
 					</div>
 				</div>
-				<div class="row" ng-if="!addListing">
+
+
+				<!--				Filter by Price-->
+				<div class="row" ng-if="!addListing || !editListing">
 					<div class="col col-sm-6">
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -140,51 +148,148 @@ ng-click="addCrib(newListing)"
 						</div>
 					</div>
 				</div>
+
+
+			</div> <!--   End of main "price-form" div for green top banner block -->
+
+
+			<!--		Edit Property Block	-->
+			<div style="background: #ffc107"
+					 class="pl-2 pr-2 pb-2 listing-form"
+					 ng-if="editListing">
+
+				<h2 class="text-danger text-center">Edit Listing</h2>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Address</span>
+					</div>
+					<input class="form-control" 
+								 type="text" 
+								 placeholder="Enter the address" 
+								 ng-model="existingListing.address">
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Price</span>
+					</div>
+					<input class="form-control" 
+								 type="text" 
+								 placeholder="Enter the price" 
+								 ng-model="existingListing.price">
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Property Type</span>
+					</div>
+					<select class="form-control" 
+									name="propertyType"
+									id="propertyType"
+									ng-model="existingListing.type">
+						<option value="House">House</option>
+						<option value="Flat">Flat</option>
+						<option value="Condo">Condo</option>
+						<option value="Duplex">Duplex</option>
+					</select>
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Description</span>
+					</div>
+					<textarea class="form-control" rows=5 placeholder="Enter the description" ng-model="existingListing.details.description"></textarea>
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Beds</span>
+					</div>
+					<input class="form-control" type="number" placeholder="Bedrooms"
+								 ng-model="existingListing.details.bedrooms">
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Baths</span>
+					</div>
+					<input class="form-control" type="number" placeholder="Bathrooms"
+								 ng-model="existingListing.details.bathrooms">
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">SqFt</span>
+					</div>
+					<input class="form-control" type="number" placeholder="Square Footage" ng-model="existingListing.details.area">
+				</div>
+				<button class="btn btn-success mt-2"
+								ng-click="saveCribEdit()">Save
+				</button>
+					<button class="btn btn-danger mt-2"
+								ng-click="deleteCrib(existingListing)">Delete
+				</button>
+
 			</div>
+
+
+
 			<br>
+
+			<!--			Real Estate Listings-->
+
 			<div class="row">
 				<div class="card card-body bg-light col col-sm-4 " ng-repeat="crib in cribs.data | cribsFilter:priceInfo | orderBy: '-id'">
 					<!-- ^^ add a filter to a function with pipe; then pass arguments with :-->
-<!--					you can chain as many filters as you want...-->
+					<!--					you can chain as many filters as you want...-->
 					<!--				<div class="thumbnail"><< i dont like the aesthetic that this produces-->
 					<img src="images/{{crib.image}}.jpg" class="img-fluid rounded mx-auto d-block" alt="A Beautiful House">
 					<!--					<div class="caption">-->
 					<!--						toggle between the two sets of details but keep the images-->
 					<div ng-hide="showDetails === true">
-						<!--						<h3> {{crib.address }}</h3>-->
+
 						<h3>
-							<i data-feather="tag"></i> {{ crib.price | currency }}
-
+							<!--							<i data-feather="tag"></i>-->
+							<i class="fa fa-tag">&nbsp;</i>			{{ crib.price | currency }}
 						</h3>
-						<!--						<p><strong>Type: </strong>{{ crib.type }}</p>-->
 						<h4>
-							<i data-feather="home"></i> {{crib.address }}
-
-
-							<!--						<p><strong>Description: </strong> {{ crib.description }}</p>-->
+							<i class="fa fa-home"></i> {{crib.address }}
 							<span style="background:#007bff;padding:3px;padding-right:4px;color:white;font-size:14px;border-radius:5px;">{{ crib.type }}</span>
 						</h4>
-						<!--						<p><strong>Price: </strong> {{ crib.price | currency }}</p>-->
 					</div>
 					<button class="btn btn-xs btn-success"
 									ng-hide="showDetails === true"
 									ng-click="showDetails = !showDetails">
 						Details
 					</button>
+
+					<button class="btn btn-xs btn-warning mt-2 mb-2"
+									ng-show="showDetails === true"
+									ng-click="editCrib(crib)">
+						Edit
+					</button>
+
+
+					<div class="details" ng-show="showDetails === true">
+						<span style="background:#007bff;padding:3px;padding-right:4px;color:white;font-size:14px;border-radius:5px;display:inline">Description</span>
+						<h4 style="display:inline">{{ crib.details.description }}</h4>
+						<hr>
+						<div class="row">
+							<h6 class="col col-sm-4"><i class="fa fa-toilet">&nbsp;</i>{{ crib.details.bathrooms }}</h6>
+							<h6 class="col col-sm-4"><i class="fa fa-bed">&nbsp;</i>{{ crib.details.bedrooms }}</h6>
+							<h6 class="col col-sm-4"><i class="fa fa-expand">&nbsp;</i>{{ crib.details.area }}&nbsp;<small>SqFt</small></h6>
+						</div>
+					</div>
+
 					<button class="btn btn-xs btn-danger"
 									ng-show="showDetails === true"
 									ng-click="showDetails = !showDetails">
 						Close
 					</button>
-					<div class="details" ng-show="showDetails === true">
-						<h4>
-							<span class="label label-primary">Description: {{ crib.description }}</span>
-						</h4>
-					</div>
-					<!--					</div>-->
-					<!--				</div>-->
+
+					
 				</div>
 			</div>
+
+
+
+
+			<!--			Random Interesting Code From Early Trainings-->
+
 			<br>
 			<hr>
 			<h1 class="text-center">{{ hello + ' how are you? ' + (3 * 7 )}}</h1>
@@ -229,9 +334,12 @@ ng-click="addCrib(newListing)"
 		<script src="scripts/cribsFactory.js"></script>
 		<script src="scripts/cribsFilter.js"></script>
 		<!-- Icons -->
-		<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-		<script>
-			feather.replace()
-		</script>
+		<!--
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+feather.replace()
+</script>
+-->
+
 	</body>
 </html>
