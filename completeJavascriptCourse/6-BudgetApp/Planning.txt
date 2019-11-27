@@ -1,0 +1,58 @@
+Event handler for: TICK => 
+    Get input values
+    Add new item to data structure
+    Add new item to ui bottom block
+    Recalculate budget
+    Update ui top block
+
+
+MODULES:
+
+    update-ui
+        get input values
+        add new item to ui bottom block
+        update ui top block
+    update-data
+        recalculate budget
+        add new item to data structure
+    controller
+        add event handler
+        
+        
+Modules Pattern - uses iife to expose only specific methods publicly
+
+
+eg:
+var budgetController = (function(){
+    
+    var x = 11;
+    var add = function(a){
+        return x + a;
+    }
+    //^^ these are private because they exist within the closure
+    // only accessible by the below object.
+    //vv this is public, it is returned when "exampleController" is called
+    return {
+        publicTest: function(b){
+            return add(b);
+        }
+    }
+    
+})();
+
+
+var controller = (function(budgetCtrl, UICtrl){
+
+    var z = budgetCtrl.publicTest(5);
+    
+    return {
+        anotherPublic: function(){
+            console.log("Z: " + z);
+        }
+    }
+})(budgetController, UIController);
+// ^^ dont need to pass these as arguments since we have access to them. 
+// however, doing it this way maintains some separation, if we want to change 
+// which other modules are included, we can just change the parameter provided
+// here
+
