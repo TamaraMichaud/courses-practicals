@@ -1,0 +1,26 @@
+"Everything is an object..." (mostly)
+
+Primitive Objects
+- Numbers, Strings, Booleans, Undefined, Null
+
+Everything Else...
+- Arrays, Functions, Objects, Dates, Wrappers for Numbers/Strings/Booleans
+
+
+--------------------------------------------------
+Object constructors and Instances (normally called a "class"... here we say "constructor" or "prototype"
+
+
+--------------------------------------------------
+Inheritance
+
+
+e.g. Person constructor,   AND  Athlete constructor... 
+     An Athlete is a type of person... with extra properties, 
+     so the Athlete object should inherit the methods and properties of the Person object....
+
+     This is done using "prototypes"; every object has a prototype property
+
+
+
+
