@@ -1,3 +1,4 @@
+<<<<<<< HEAD:completeJavascriptCourse/6 - Budget App/app.js
 function getElement(elementId){
     
     return document.getElementById(elementId);
