@@ -86,8 +86,9 @@ var budgetController = (function(){
        updateData: function(newItem){
            
            var nextId = data.listItems.exp.length + data.listItems.inc.length;
-           var nextItem = new BudgetItemObject(nextId, newItem.desc, newItem.amount, newItem.type)
+           var nextItem = new BudgetItemObject(nextId, newItem.desc, newItem.amount, newItem.incexp)
            
+           console.log(nextItem);
                       
            if(nextItem.type === "inc") {
                //add amount to totalIncome and budgetValue
@@ -96,16 +97,12 @@ var budgetController = (function(){
            } else {
                //remove amount from totalExpenses and budgetValue
                data.totals.exp -= amount;
-               data.listItems[type].push(nextItem);   // can reference the type dynamically as so
+               data.listItems[nextItem.type].push(nextItem);   // can reference the type dynamically as so
            }
            
            return data;
-
        }
-
    } 
-    
-    
     
 })();
 

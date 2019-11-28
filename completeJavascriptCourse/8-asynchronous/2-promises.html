@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asynchronous JavaScript</title>
+</head>
+<body>
+    <h1>Asynchronous JavaScript</h1>
+    <script>
+/*function getRecipes(){
+    //simulate an ajax call
+    setTimeout(() => {
+        const recipeID = [523, 883, 432, 974];
+        console.log(recipeID);
+        //simulate a second call to get a particular recipe
+        setTimeout((id) => {
+//id=883
+            const recipe = {
+                        title: 'fresh tomato pasta',
+                        publisher: 'me'
+                    };
+            console.log(`${id}:${recipe.title}`);
+
+            setTimeout(onearg => {
+                const recipe2 = { 
+                    title: 'italian pizza',
+                    publisher: 'me'
+                }
+                console.log(recipe2);
+            }, 1000, recipe.publisher);
+        }, 1000, recipeID[2]); //883
+    }, 1500);
+}
+getRecipes();*/
+
+// ^^ rewrite the above using promises
+//promises:
+const getIds = new Promise((resolve, reject) => {
+    // fake asynchronous call
+    setTimeout(function(){
+        console.log("waiting 1.5 secs");
+        //resolve(promiseResult);  // imagine we made an ajax and promiseResult was the data set.  but we didnt, so we fake it:
+        resolve([523, 883, 432, 974]);
+        // now here we want to get our result - so we call the resolve function.
+        // "resolve(x)" will effectively "return" x.
+
+        // if this were a more volatile thing than a timeOut and thereby had a chance to fail, then
+        // we would utilize the reject() function in the same way we did the resolve() function in order
+        // to get something back when it all goes wrong
+        reject("OH NO IT's BROKEN");
+
+    }, 1500);
+});
+// ^^ () => {} == callback function == executor function.
+// takes 2 arguments; resolve, reject.
+
+const getRecipe = (recipeId) => {
+
+    return new Promise((resolve, reject) => {
+
+        setTimeout(recipeId => {
+                const recipe = { 
+                    title: 'italian pizza',
+                    publisher: 'me'
+                }
+                resolve(recipe);   // callback function
+            }, 1000, recipeId);
+
+    });
+}
+
+
+// how to consume a promise?
+// promises (i.e. getIds variable is a promise object) - have 2 main methods;
+// then() and catch().
+
+// getIds.then(fnWasSuccessful(data))
+getIds
+.then(function(data){
+    console.log("Data Results: " + data);
+    getRecipe(data[2]).then(
+        //... << now we're starting to suffer callback hell, then's inside then's.... no good.
+    );
+})
+// getIds.catch(fnWasFailure(data))
+.catch(error => {
+    console.log("error: " + error);
+})   // these two automatically pull in the contents of resolve() and reject() respectively 
+
+
+// CHAINING.   we have a variable and a functions above, the second requires the results of the first. both return promises... so chain the results:
+getIds
+.then(function(data){
+    console.log("got all recipes: " + data);
+    return getRecipe(data[2]);
+})
+.then(selectedRecipe => {
+    console.log("picked a recipe; " + selectedRecipe.title);
+})
+
+
+
+
+    </script>
+</body>
+</html>

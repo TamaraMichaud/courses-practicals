@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asynchronous JavaScript</title>
+</head>
+<body>
+    <h1>Asynchronous JavaScript</h1>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+
+    // jQuery.support.cors = true;
+        // ^^ this doesn't work here since we haven't imported any jquery library.  but the below doesn't work either... :/
+        // and now that we've imported jquery to stop this line from erroring... it's made zero difference, fetch() still failing. (work network.)
+
+    // fetch('https://www.metaweather.com/api/');
+        // ^^ fail.  auto-security of javascript does not allow change of main domain.
+
+        // however, we can use a proxy to field the call through our own server to overcome this block.
+        //crossoriginWorkaround = 'https://crossorigin.me/'; // << open source free resource
+
+    // fetch(crossoriginWorkaround + apiEndpoint);
+        // fetch('https://crossorigin.me/https://www.metaweather.com/api/location/44418/');
+        // ^^ returns a promise.
+    //^^ none of the above works lol...
+
+
+    // AJAX with fetch() and promise()
+function getQOD(noParamRequiredButStill){
+
+    fetch('https://quotes.rest/qod')
+    .then(allok => {
+        console.log("success: " + allok);
+        return allok.json(); // << returning a promise; "json()" conversion can take some time => this converts a RESPONSE to only the Body attrib.
+    })
+    .then(jsonResult => {
+        console.log("Json result of body:");
+        console.log(jsonResult);
+
+        console.log("The Quote: " + jsonResult.contents.quotes[0].quote);
+    })
+    .catch(crappsticks => {
+        console.log("failure: " + crappsticks)
+    }); 
+}
+getQOD();
+
+
+    // AJAX with fetch() and async/await
+async function getQodAW(noParamRequiredButStill){
+
+    const result = await fetch('https://quotes.rest/qod');
+    const data = await result.json(); // << returning a promise; "json()" conversion can take some time => this converts a RESPONSE to only the Body attrib.
+    console.log("2 The Quote: " + data.contents.quotes[0].quote);
+    return data; // << the resolved promise
+}
+getQodAW();
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
